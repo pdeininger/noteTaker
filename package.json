@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/pdeininger/noteTaker/issues"
   },
-  "homepage": "https://github.com/pdeininger/noteTaker#readme"
+  "homepage": "https://github.com/pdeininger/noteTaker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
