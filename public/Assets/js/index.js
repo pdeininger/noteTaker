@@ -131,7 +131,6 @@ var getAndRenderNotes = function() {
     renderNoteList(data);
   });
 };
-
 $saveNoteBtn.on("click", handleNoteSave);
 $noteList.on("click", ".list-group-item", handleNoteView);
 $newNoteBtn.on("click", handleNewNoteView);

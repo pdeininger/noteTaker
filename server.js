@@ -3,7 +3,7 @@
 const express = require("express");
 //path file names
 const path = require("path");
-//to read and  write files
+//to read and write files
 const fs = require("fs");
 //express server
 const app = express();
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(_dirname, './public')))
+app.use(express.static(path.join(__dirname, './public')));
 
 
 //get API notes-sends user to AJAX page
@@ -22,7 +22,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/notes", function(req, res) {
-  res.sendFile(path.join(_dirname, "./public/notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 // displays all notes
@@ -47,9 +47,10 @@ app.delete("/api/notes/:id", function(req, res) {
   const chosenNote = req.params.id;
   console.log(chosenNote);
   console.log(db);
+  db.splice(chosenNote, 1);
 });
 
-db.splice(chosenNote, 1);
+
 
 
 //server listening
