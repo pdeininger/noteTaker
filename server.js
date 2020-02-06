@@ -13,8 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, './public')));
-
+app.use(express.static(path.join(__dirname, "./public")));
 
 //get API notes-sends user to AJAX page
 app.get("/", function(req, res) {
@@ -31,12 +30,16 @@ app.get("/api/notes", function(req, res) {
 });
 
 //post API notes
-app.post("api/notes", function(req, res) {
+app.post("/api/notes", function(req, res) {
+  console.log("im hit");
   let newNote = req.body;
   newNote["id"] = db.length;
   console.log(newNote);
+  console.log(db);
   db.push(newNote);
+  console.log(db);
 });
+
 fs.writeFile("./db/db.json", JSON.stringify(db), function(err) {
   if (err) throw err;
   console.log("Noted");
@@ -49,9 +52,6 @@ app.delete("/api/notes/:id", function(req, res) {
   console.log(db);
   db.splice(chosenNote, 1);
 });
-
-
-
 
 //server listening
 app.listen(PORT, function() {
