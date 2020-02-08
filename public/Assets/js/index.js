@@ -7,6 +7,13 @@ var $noteList = $(".list-container .list-group");
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
+//heroku database
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString:  process.env.DATABASE_URL,
+  ssl:  true
+});
+
 // A function for getting all notes from the db
 var getNotes = function() {
   return $.ajax({
@@ -23,6 +30,18 @@ var saveNote = function(note) {
     method: "POST"
   });
 };
+
+get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result =await client.query('SELECT * FROM test_table');
+    const results = { 'results': (result) ? results.rows : null};
+    res.render('pages/db', results );
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err)
+  }
+  });
 
 // A function for deleting a note from the db
 var deleteNote = function(id) {
